@@ -9,7 +9,7 @@ metadata:
 
 run:
   steps:
-    - lava-test-case bt-hci-check --shell '
+    - lava-test-case bt-hci-check --shell |
         echo "Waiting for Bluetooth adapters to initialize..."
 
         # Wait up to ~30 seconds for USB BT (hci1)
