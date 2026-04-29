@@ -12,7 +12,6 @@ run:
     - lava-test-case bt-hci-check --shell |
         echo "Waiting for Bluetooth adapters to initialize..."
 
-        # Wait up to ~30 seconds for USB BT (hci1)
         for i in $(seq 1 15); do
           if hciconfig | grep -q "^hci1"; then
             echo "USB Bluetooth (hci1) detected"
