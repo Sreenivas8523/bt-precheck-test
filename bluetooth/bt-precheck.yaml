@@ -1,0 +1,12 @@
+metadata:
+  format: "Lava-Test Test Definition 1.0"
+  name: bt-precheck
+  description: Bluetooth prechecks before BT functional tests
+  os:
+    - linux
+  scope:
+    - functional
+
+run:
+  steps:
+    - lava-test-case hciconfig --shell "hciconfig || true"
