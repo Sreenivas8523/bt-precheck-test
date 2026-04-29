@@ -12,12 +12,11 @@ run:
     - lava-test-case bt-hci-check --shell |
         echo "Waiting for Bluetooth adapters to initialize..."
 
-        for i in $(seq 1 15); do
-          if hciconfig | grep -q "^hci1"; then
-            echo "USB Bluetooth (hci1) detected"
-            break
-          fi
+        i=0
+        while [ $i -lt 15 ]; do
+          hciconfig | grep -q "^hci1" && echo "USB Bluetooth (hci1) detected" && break
           sleep 2
+          i=$((i+1))
         done
 
         echo "Final hciconfig output:"
