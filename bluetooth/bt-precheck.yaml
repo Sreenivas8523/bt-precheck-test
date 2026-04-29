@@ -1,7 +1,7 @@
 metadata:
   format: "Lava-Test Test Definition 1.0"
   name: bt-precheck
-  description: Bluetooth prechecks before BT functional tests
+  description: Bluetooth prechecks – wait for all adapters before BT tests
   os:
     - linux
   scope:
@@ -9,4 +9,19 @@ metadata:
 
 run:
   steps:
-    - lava-test-case hciconfig --shell "hciconfig || true"
+    - lava-test-case bt-hci-check --shell '
+        echo "Waiting for Bluetooth adapters to initialize..."
+
+        # Wait up to ~30 seconds for USB BT (hci1)
+        for i in $(seq 1 15); do
+          if hciconfig | grep -q "^hci1"; then
+            echo "USB Bluetooth (hci1) detected"
+            break
+          fi
+          sleep 2
+        done
+
+        echo "Final hciconfig output:"
+        hciconfig || true
+
+        exit 0
