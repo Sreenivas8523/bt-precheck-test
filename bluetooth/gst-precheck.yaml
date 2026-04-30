@@ -1,7 +1,7 @@
 metadata:
   format: "Lava-Test Test Definition 1.0"
   name: gst-codec-precheck
-  description: GStreamer H264/H265 codec availability precheck
+  description: GStreamer H264/H265 encoder/decoder availability precheck
   os:
     - linux
   scope:
@@ -9,4 +9,4 @@ metadata:
 
 run:
   steps:
-    - lava-test-case gst-codec-precheck --shell "echo 'Checking GStreamer codec plugins'; gst-inspect-1.0 | grep -E '264|265|v4l2|x264|avdec' && echo 'Codec plugins found' || echo 'No H264/H265 codec plugins found'; gst-inspect-1.0 | grep -E '264|265|v4l2|x264|avdec' || true"
+    - lava-test-case gst-codec-precheck --shell "echo 'Checking GStreamer H264/H265 encoders and decoders'; gst-inspect-1.0 | grep -E 'avdec_h26(4|5)|x26(4|5)enc|v4l2h26(4|5)(enc|dec)' && echo 'H264/H265 video enc/dec available' || echo 'No H264/H265 video encoders or decoders found'; gst-inspect-1.0 | grep -E 'avdec_h26(4|5)|x26(4|5)enc|v4l2h26(4|5)(enc|dec)' || true"
