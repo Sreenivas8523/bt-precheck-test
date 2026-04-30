@@ -9,4 +9,4 @@ metadata:
 
 run:
   steps:
-    - lava-test-case bt-hci-check --shell "echo 'Waiting for USB Bluetooth'; modprobe btusb || true; for i in 1 2 3 4 5 6 7 8; do hciconfig | grep -q '^hci1' && echo 'USB Bluetooth detected' && break; sleep 5; done; echo 'Final hciconfig output:'; hciconfig || true; echo 'lsusb output:'; lsusb || true; echo 'GPIO debug (116):'; cat /sys/kernel/debug/gpio | grep -i 116 || true; echo 'Bluetooth dmesg:'; dmesg | grep -i bluetooth || true"
+    - lava-test-case bt-hci-check --shell "echo 'Waiting for USB Bluetooth'; for i in 1 2 3 4 5 6 7 8; do hciconfig | grep -q '^hci1' && echo 'USB Bluetooth detected' && break; sleep 5; done; echo 'Final hciconfig output:'; hciconfig || true; echo 'lsusb output:'; lsusb || true; echo 'GPIO debug (116):'; cat /sys/kernel/debug/gpio | grep -i 116 || true; echo 'Bluetooth dmesg:'; dmesg | grep -i bluetooth || true"
